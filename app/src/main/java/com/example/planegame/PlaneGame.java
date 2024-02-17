@@ -77,7 +77,7 @@ public class PlaneGame extends View {
         scorePlace = BitmapFactory.decodeResource(context.getResources(), R.drawable.score);
         resizedScorePlace = Bitmap.createScaledBitmap(scorePlace, 200, 50, false);
         healthBar = BitmapFactory.decodeResource(context.getResources(), R.drawable.health);
-        resizedHealth = Bitmap.createScaledBitmap(healthBar, 530, 120, false);
+        resizedHealth = Bitmap.createScaledBitmap(healthBar, screenWidth / 3, 120, false);
         buttonBack = BitmapFactory.decodeResource(context.getResources(), R.drawable.menu);
         resizedLineButton = Bitmap.createScaledBitmap(buttonBack, 150, 120, false);
         background = BitmapFactory.decodeResource(context.getResources(), R.drawable.background05);
@@ -85,12 +85,12 @@ public class PlaneGame extends View {
         resizedLineMenu = Bitmap.createScaledBitmap(lineMenu, 100000, 10, false);
 
         lifeImageGreen = BitmapFactory.decodeResource(context.getResources(), R.drawable.health_point03);
-        resizedGreen = Bitmap.createScaledBitmap(lifeImageGreen, 16, 65, false);
+        resizedGreen = Bitmap.createScaledBitmap(lifeImageGreen, resizedHealth.getWidth() / 21, 65, false);
 
         lifeImageYellow = BitmapFactory.decodeResource(context.getResources(), R.drawable.health_point02);
-        resizedYellow = Bitmap.createScaledBitmap(lifeImageYellow, 16, 65, false);
+        resizedYellow = Bitmap.createScaledBitmap(lifeImageYellow, resizedHealth.getWidth() / 21, 65, false);
         lifeImageRed = BitmapFactory.decodeResource(context.getResources(), R.drawable.health_point01);
-        resizedRed = Bitmap.createScaledBitmap(lifeImageRed, 16, 65, false);
+        resizedRed = Bitmap.createScaledBitmap(lifeImageRed, resizedHealth.getWidth() / 21, 65, false);
         scorePaint = new Paint();
         scorePaint.setTextSize(TEXT_SIZE);
         scorePaint.setTextAlign(Paint.Align.LEFT);
@@ -112,7 +112,7 @@ public class PlaneGame extends View {
         canvas.drawBitmap(resizedLineMenu, 0, 200, null);
         /*canvas.drawText("" + points, (float) width /2, TEXT_SIZE, scorePaint);*/
         canvas.drawBitmap(resizedLineButton, 20, 38, null);
-        canvas.drawBitmap(resizedHealth, width - 20 - 530, 35, null);
+        canvas.drawBitmap(resizedHealth, (float) (width - 20 - (float) screenWidth / 3), 35, null);
         canvas.drawBitmap(resizedScore, 400, 50, null);
         canvas.drawBitmap(resizedScorePlace, 400, 100, null);
         int number = points;
@@ -126,13 +126,13 @@ public class PlaneGame extends View {
         canvas.drawText("" + points, 390 + (float) resizedScorePlace.getWidth() / 2 - count * 10, 115 + (float) resizedScorePlace.getHeight() / 2, scorePaint);
         for (int i=life; i>=1; i--) {
             if (i >= 9) {
-                canvas.drawBitmap(resizedGreen, screenWidth - lifeImageGreen.getWidth() * (12 - i)- 55, 62, null);
+                canvas.drawBitmap(resizedGreen, screenWidth - resizedGreen.getWidth() * (12 - i) - 55 - 5 * (12 - i - 1), 62, null);
             }
             else if (i >= 5) {
-                canvas.drawBitmap(resizedYellow, screenWidth - lifeImageYellow.getWidth() * (12 - i)- 55, 62, null);
+                canvas.drawBitmap(resizedYellow, screenWidth - resizedYellow.getWidth() * (12 - i) - 55 - 5 * (12 - i - 1), 62, null);
             }
             else {
-                canvas.drawBitmap(resizedRed, screenWidth - lifeImageRed.getWidth() * (12 - i)- 55, 62, null);
+                canvas.drawBitmap(resizedRed, screenWidth - resizedRed.getWidth() * (12 - i) - 55 - 5 * (12 - i - 1), 62, null);
             }
         }
         if (life == 0){
